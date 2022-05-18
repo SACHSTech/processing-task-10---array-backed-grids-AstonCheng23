@@ -59,7 +59,7 @@ public class Sketch extends PApplet {
         }
 
         if (mouseSquareX == rowCheck && mouseSquareY == columnCheck){
-          intGrid[rowCheck][columnCheck] = 1;
+          colourSquare();
         }
       }
     }
@@ -69,5 +69,32 @@ public class Sketch extends PApplet {
     mouseSquareX = (int)(mouseX/25.5);
     mouseSquareY = (int)(mouseY/25.5);
     println("click " + mouseX + " " + mouseY + " " + mouseSquareX + " " + mouseSquareY);
+  }
+  public void colourSquare(){
+    try{
+      intGrid[rowCheck][columnCheck] = 1;
+    } catch(java.lang.ArrayIndexOutOfBoundsException error){
+
+    }
+    try{
+      intGrid[rowCheck + 1][columnCheck] = 1;
+    } catch(java.lang.ArrayIndexOutOfBoundsException error){
+
+    }
+    try{
+      intGrid[rowCheck - 1][columnCheck] = 1;
+    } catch(java.lang.ArrayIndexOutOfBoundsException error){
+
+    }
+    try{
+      intGrid[rowCheck][columnCheck + 1] = 1;
+    } catch(java.lang.ArrayIndexOutOfBoundsException error){
+
+    }
+    try{
+      intGrid[rowCheck][columnCheck - 1] = 1;
+    } catch(java.lang.ArrayIndexOutOfBoundsException error){
+
+    }
   }
 }
