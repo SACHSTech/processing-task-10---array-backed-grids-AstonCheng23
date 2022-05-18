@@ -20,6 +20,7 @@ public class Sketch extends PApplet {
   int mouseSquareX = 300;
   int mouseSquareY = 300;
 
+  int checkColouredSquares = 0;
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
@@ -42,9 +43,9 @@ public class Sketch extends PApplet {
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-    //println(width + " " + height);
 
     columnCheck = -1;
+    checkColouredSquares = 0;
 	  for(int column = cellMargin; column < width; column += (width/columnCount)){
       columnCheck += 1;
       rowCheck = -1;
@@ -53,46 +54,75 @@ public class Sketch extends PApplet {
         if(intGrid[rowCheck][columnCheck] == 1){
           fill(0,255,0);
           rect(row, column, cellWidth, cellHeight);
+          
+          checkColouredSquares += 1;
         } else if(intGrid[rowCheck][columnCheck] == 0){
           fill(255,255,255);
           rect(row, column, cellWidth, cellHeight);
+          
+          //checkColouredSquares += -1;
         }
 
-        if (mouseSquareX == rowCheck && mouseSquareY == columnCheck){
+        if (mouseSquareX == rowCheck && mouseSquareY == columnCheck && mousePressed == true){
           colourSquare();
-        }
+        } 
       }
     }
+    mouseSquareX = -100;
+    mouseSquareY = -100;
   }
 
   public void mousePressed(){
     mouseSquareX = (int)(mouseX/25.5);
     mouseSquareY = (int)(mouseY/25.5);
     println("click " + mouseX + " " + mouseY + " " + mouseSquareX + " " + mouseSquareY);
+
+    println("Total of " + checkColouredSquares + " cells are selected.");
   }
+
   public void colourSquare(){
     try{
-      intGrid[rowCheck][columnCheck] = 1;
+      if(intGrid[rowCheck][columnCheck] == 0){
+        intGrid[rowCheck][columnCheck] = 1;
+      } else if(intGrid[rowCheck][columnCheck] == 1){
+        intGrid[rowCheck][columnCheck] = 0;
+      }
     } catch(java.lang.ArrayIndexOutOfBoundsException error){
 
     }
     try{
-      intGrid[rowCheck + 1][columnCheck] = 1;
+      if(intGrid[rowCheck + 1][columnCheck] == 0){
+        intGrid[rowCheck + 1][columnCheck] = 1;
+      } else if(intGrid[rowCheck + 1][columnCheck] == 1){
+        intGrid[rowCheck + 1][columnCheck] = 0;
+      }
     } catch(java.lang.ArrayIndexOutOfBoundsException error){
 
     }
     try{
-      intGrid[rowCheck - 1][columnCheck] = 1;
+      if(intGrid[rowCheck - 1][columnCheck] == 0){
+        intGrid[rowCheck - 1][columnCheck] = 1;
+      } else if(intGrid[rowCheck - 1][columnCheck] == 1){
+        intGrid[rowCheck - 1][columnCheck] = 0;
+      }
+    } catch(java.lang.ArrayIndexOutOfBoundsException error){
+
+    }
+    try{      
+      if(intGrid[rowCheck][columnCheck + 1] == 0){
+        intGrid[rowCheck][columnCheck + 1] = 1;
+    } else if(intGrid[rowCheck][columnCheck + 1] == 1){
+        intGrid[rowCheck][columnCheck + 1] = 0;
+    }
     } catch(java.lang.ArrayIndexOutOfBoundsException error){
 
     }
     try{
-      intGrid[rowCheck][columnCheck + 1] = 1;
-    } catch(java.lang.ArrayIndexOutOfBoundsException error){
-
-    }
-    try{
-      intGrid[rowCheck][columnCheck - 1] = 1;
+      if(intGrid[rowCheck][columnCheck - 1] == 0){
+        intGrid[rowCheck][columnCheck - 1] = 1;
+      } else if(intGrid[rowCheck][columnCheck - 1] == 1){
+        intGrid[rowCheck][columnCheck - 1] = 0;
+      }
     } catch(java.lang.ArrayIndexOutOfBoundsException error){
 
     }
