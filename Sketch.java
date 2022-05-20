@@ -153,13 +153,13 @@ public class Sketch extends PApplet {
       for(int checkY = 0; checkY < 10; checkY ++){
         if(intGrid[checkX][checkY] == 1){
           checkColouredSquares += 1;
-          columnColourCheck[checkY] += 1;
+          columnColourCheck[checkX] += 1;
         }
         if(intGrid[checkX][checkY] == 0){
           checkNotColouredSquares += 1;
         }
       }
-      println("Row " + checkX + " has " + columnColourCheck[checkX] + " cells selected"); 
+      println("Column " + checkX + " has " + columnColourCheck[checkX] + " cells selected"); 
 
     }
     println("Total of " + checkColouredSquares + " cells are selected.");
